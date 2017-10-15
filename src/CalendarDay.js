@@ -5,7 +5,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 
-import { Text, View, LayoutAnimation, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity } from "react-native";
 import styles from "./Calendar.style.js";
 
 export default class CalendarDay extends Component {
@@ -42,11 +42,7 @@ export default class CalendarDay extends Component {
       duration: 300,
       borderWidth: 1,
       borderHighlightColor: "black",
-      highlightColor: "yellow",
-      animType: LayoutAnimation.Types.easeInEaseOut,
-      animUpdateType: LayoutAnimation.Types.easeInEaseOut,
-      animProperty: LayoutAnimation.Properties.opacity,
-      animSpringDamping: undefined // Only applicable for LayoutAnimation.Types.spring,
+      highlightColor: "yellow"
     },
     styleWeekend: true,
     showDayName: true,
@@ -69,39 +65,6 @@ export default class CalendarDay extends Component {
   componentWillReceiveProps(nextProps) {
     newState = {};
     if (this.state.selected !== nextProps.selected) {
-      if (this.props.daySelectionAnimation.type !== "") {
-        let configurableAnimation = {
-          duration: this.props.daySelectionAnimation.duration || 300,
-          create: {
-            type: (
-              this.props.daySelectionAnimation.animType ||
-                LayoutAnimation.Types.easeInEaseOut
-            ),
-            property: (
-              this.props.daySelectionAnimation.animProperty ||
-                LayoutAnimation.Properties.opacity
-            )
-          },
-          update: {
-            type: (
-              this.props.daySelectionAnimation.animUpdateType ||
-                LayoutAnimation.Types.easeInEaseOut
-            ),
-            springDamping: this.props.daySelectionAnimation.animSpringDamping
-          },
-          delete: {
-            type: (
-              this.props.daySelectionAnimation.animType ||
-                LayoutAnimation.Types.easeInEaseOut
-            ),
-            property: (
-              this.props.daySelectionAnimation.animProperty ||
-                LayoutAnimation.Properties.opacity
-            )
-          }
-        };
-        LayoutAnimation.configureNext(configurableAnimation);
-      }
       newState.selected = nextProps.selected;
     }
 
